@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
 
 const ShimmerUi = () => {
   return (
-    <h1>Shimmer Ui is loading...</h1>
-  )
-}
+    <div className="restaurent-list">
+      {Array(12)
+        .fill("")
+        .map((e, index) => (
+          <div key={index} className="shimmer-card"></div>
+        ))}
+    </div>
+  );
+};
 
 export default ShimmerUi;

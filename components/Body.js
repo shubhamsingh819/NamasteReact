@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { restaurentList } from "../src/config";
+// import { restaurentList } from "../src/config";
 import RestaurentCard from "./RestaurentCard";
 import ShimmerUi from "./ShimmerUi";
+import { Link } from "react-router-dom";
+import { filteredData } from "../utils/Helper";
 
 const Body = () => {
   //
@@ -17,20 +19,13 @@ const Body = () => {
 
   async function getRestaurents() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.3352337&lng=74.6157151&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
     setAllRestaurent(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
-
-  const filteredData = (searchText) => {
-    const filterData = allRestaurent.filter((restaurant) =>
-      restaurant?.data?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
-    );
-    return filterData;
-  };
 
   // conditional Rendring
 
@@ -67,7 +62,12 @@ const Body = () => {
         )}
         {filteredRestaurants.map((restaurent) => {
           return (
-            <RestaurentCard {...restaurent.data} key={restaurent.data.id} />
+            <Link
+              to={"/restaurent/" + restaurent.data.id}
+              key={restaurent.data.id}
+            >
+              <RestaurentCard {...restaurent.data} />
+            </Link>
           );
         })}
       </div>
@@ -76,3 +76,4 @@ const Body = () => {
 };
 
 export default Body;
+

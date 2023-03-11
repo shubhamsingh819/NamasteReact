@@ -1,9 +1,5 @@
 import { useState } from "react";
-
-const logedInUser = () => {
-  // Api call to check authentication
-  return false;
-};
+import { Link } from "react-router-dom";  
 
 const Title = () => (
   <a href="/">
@@ -23,17 +19,22 @@ const Header = () => {
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
+          <li>
+            <Link to={"/"}>Home </Link>{" "}
+          </li>
+          <li>
+            <Link to={"/about"}> About </Link>
+          </li>
+
+          <li> <Link to={"/contact"}> Contact </Link></li>
+          <li><Link to={"/cart"}>Cart</Link></li>
         </ul>
       </div>
-      {
-        isLogedIn?  <button onClick={() => setIsLogedIn(false)}>LogOut</button>: <button onClick={() => setIsLogedIn(true)}>LogedIn</button>
-      }
-     
-     
+      {isLogedIn ? (
+        <button onClick={() => setIsLogedIn(false)}>LogOut</button>
+      ) : (
+        <button onClick={() => setIsLogedIn(true)}>LogedIn</button>
+      )}
     </div>
   );
 };
