@@ -4,7 +4,7 @@ import RestaurentCard from "./RestaurentCard";
 import ShimmerUi from "./ShimmerUi";
 import { Link } from "react-router-dom";
 import { filteredData } from "../utils/Helper";
-
+import useOnline from "../utils/useOnline";
 const Body = () => {
   //
   const [allRestaurent, setAllRestaurent] = useState([]);
@@ -18,15 +18,17 @@ const Body = () => {
   }, []);
 
   async function getRestaurents() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
     const json = await data.json();
     console.log(json);
     setAllRestaurent(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
+  const isOnline = useOnline();
+  if(!isOnline){
+    return <h1>Please check your internet connection</h1>
+  }
   // conditional Rendring
 
   return allRestaurent?.length === 0 ? (
