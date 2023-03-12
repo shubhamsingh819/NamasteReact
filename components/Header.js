@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";  
+import { Link } from "react-router-dom";
 
 const Title = () => (
   <a href="/">
@@ -28,6 +28,8 @@ const Header = () => {
 
           <li> <Link to={"/contact"}> Contact </Link></li>
           <li><Link to={"/cart"}>Cart</Link></li>
+          <li><Link to={"/instaMart"}>InstaMart</Link></li>
+
         </ul>
       </div>
       {isLogedIn ? (
